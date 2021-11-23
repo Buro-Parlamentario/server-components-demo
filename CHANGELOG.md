@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.2](https://github.com/Buro-Parlamentario/video-call/compare/v0.1.1...v0.1.2) (2021-11-23)
+
+
+### Features
+
+* **rooms:** add videocall in group room ([60d2441](https://github.com/Buro-Parlamentario/video-call/commit/60d2441a80bf63babec3ca20e43b9f9d13b7da45))
+
 ### 0.1.1 (2021-11-23)
 
 
