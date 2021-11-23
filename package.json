@@ -63,7 +63,7 @@
     "bundler:prod": "cross-env NODE_ENV=production nodemon -- scripts/build.js",
     "prettier": "prettier --write **/*.js",
     "eslint": "eslint . --fix --debug",
-    "release": "standard-version && git push --follow-tags origin master && npm run deploy:docker",
+    "release": "standard-version && git push --follow-tags origin main && npm run deploy:docker",
     "commitlint": "commitlint --from=master",
     "aws:login": "aws ecr get-login-password | docker login --username AWS --password-stdin 583507426515.dkr.ecr.sa-east-1.amazonaws.com/video-call",
     "build:docker": "docker build --platform linux/amd64 -t 583507426515.dkr.ecr.sa-east-1.amazonaws.com/video-call:${npm_package_version} .",
