@@ -6,8 +6,9 @@
  *
  */
 
-import {unstable_getCacheForType, unstable_useCacheRefresh} from 'react';
-import {createFromFetch} from 'react-server-dom-webpack';
+// eslint-disable-next-line camelcase
+import { unstable_getCacheForType, unstable_useCacheRefresh } from 'react';
+import { createFromFetch } from 'react-server-dom-webpack';
 
 function createResponseCache() {
   return new Map();
@@ -27,9 +28,7 @@ export function useServerResponse(location) {
   if (response) {
     return response;
   }
-  response = createFromFetch(
-    fetch('/react?location=' + encodeURIComponent(key))
-  );
+  response = createFromFetch(fetch(`/react?location=${encodeURIComponent(key)}`));
   cache.set(key, response);
   return response;
 }

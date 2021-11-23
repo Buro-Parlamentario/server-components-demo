@@ -6,12 +6,10 @@
  *
  */
 
-'use strict';
-
 const fs = require('fs');
 const path = require('path');
-const {Pool} = require('pg');
-const {readdir, unlink, writeFile} = require('fs/promises');
+const { Pool } = require('pg');
+const { readdir, unlink, writeFile } = require('fs/promises');
 const startOfYear = require('date-fns/startOfYear');
 const credentials = require('../credentials');
 
@@ -22,9 +20,7 @@ const now = new Date();
 const startOfThisYear = startOfYear(now);
 // Thanks, https://stackoverflow.com/a/9035732
 function randomDateBetween(start, end) {
-  return new Date(
-    start.getTime() + Math.random() * (end.getTime() - start.getTime())
-  );
+  return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
 
 const dropTableStatement = 'DROP TABLE IF EXISTS notes;';
@@ -64,20 +60,18 @@ notes in this app! These note live on the server in the \`notes\` folder.
 async function seed() {
   await pool.query(dropTableStatement);
   await pool.query(createTableStatement);
-  const res = await Promise.all(
-    seedData.map((row) => pool.query(insertNoteStatement, row))
-  );
+  const res = await Promise.all(seedData.map((row) => pool.query(insertNoteStatement, row)));
 
   const oldNotes = await readdir(path.resolve(NOTES_PATH));
   await Promise.all(
     oldNotes
       .filter((filename) => filename.endsWith('.md'))
-      .map((filename) => unlink(path.resolve(NOTES_PATH, filename)))
+      .map((filename) => unlink(path.resolve(NOTES_PATH, filename))),
   );
 
   await Promise.all(
-    res.map(({rows}) => {
-      const id = rows[0].id;
+    res.map(({ rows }) => {
+      const { id } = rows[0];
       const content = rows[0].body;
       const data = new Uint8Array(Buffer.from(content));
       return writeFile(path.resolve(NOTES_PATH, `${id}.md`), data, (err) => {
@@ -85,7 +79,7 @@ async function seed() {
           throw err;
         }
       });
-    })
+    }),
   );
 }
 

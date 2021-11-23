@@ -6,7 +6,7 @@
  *
  */
 
-import {createContext, useContext} from 'react';
+import { createContext, useContext } from 'react';
 
 export const LocationContext = createContext();
 export function useLocation() {

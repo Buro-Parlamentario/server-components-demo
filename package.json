@@ -30,12 +30,29 @@
     "resolve": "1.12.0",
     "rimraf": "^3.0.2",
     "sanitize-html": "^2.2.0",
+    "twilio": "^3.71.2",
+    "twilio-video": "^2.18.1",
+    "uuid": "^8.3.2",
     "webpack": "4.44.2",
     "webpack-cli": "^4.2.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^8.3.4",
+    "@commitlint/config-conventional": "^8.3.4",
+    "babel-eslint": "^10.1.0",
     "cross-env": "^7.0.3",
-    "prettier": "1.19.1"
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.3",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "husky": "^4.2.3",
+    "lint-staged": "^9.5.0",
+    "prettier": "^1.19.1",
+    "standard-version": "^7.0.1"
   },
   "scripts": {
     "start": "concurrently \"npm run server:dev\" \"npm run bundler:dev\"",
@@ -45,7 +62,13 @@
     "bundler:dev": "cross-env NODE_ENV=development nodemon -- scripts/build.js",
     "bundler:prod": "cross-env NODE_ENV=production nodemon -- scripts/build.js",
     "prettier": "prettier --write **/*.js",
-    "seed": "node ./scripts/seed.js"
+    "eslint": "eslint . --fix --debug",
+    "release": "standard-version && git push --follow-tags origin master && npm run deploy:docker",
+    "commitlint": "commitlint --from=master",
+    "aws:login": "aws ecr get-login-password | docker login --username AWS --password-stdin 583507426515.dkr.ecr.sa-east-1.amazonaws.com/video-call",
+    "build:docker": "docker build --platform linux/amd64 -t 583507426515.dkr.ecr.sa-east-1.amazonaws.com/video-call:${npm_package_version} .",
+    "push:docker": "docker push 583507426515.dkr.ecr.sa-east-1.amazonaws.com/video-call:${npm_package_version}",
+    "deploy:docker": "npm run aws:login && npm run build:docker && npm run push:docker"
   },
   "babel": {
     "presets": [

@@ -1,0 +1,9 @@
+/coverage
+/dist
+/node_modules
+/test/fixtures
+/deprecated
+.eslintrc.js
+.eslintignore
+/build
+/scripts/*

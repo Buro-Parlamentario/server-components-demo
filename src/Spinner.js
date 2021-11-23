@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 /**
  * Copyright (c) Facebook, Inc. and its affiliates.
  *
@@ -6,7 +7,7 @@
  *
  */
 
-export default function Spinner({active = true}) {
+export default function Spinner({ active = true }) {
   return (
     <div
       className={['spinner', active && 'spinner--active'].join(' ')}

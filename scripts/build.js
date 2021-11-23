@@ -6,8 +6,6 @@
  *
  */
 
-'use strict';
-
 const path = require('path');
 const rimraf = require('rimraf');
 const webpack = require('webpack');
@@ -39,7 +37,7 @@ webpack(
         inject: true,
         template: path.resolve(__dirname, '../public/index.html'),
       }),
-      new ReactServerWebpackPlugin({isServer: false}),
+      new ReactServerWebpackPlugin({ isServer: false }),
     ],
   },
   (err, stats) => {
@@ -59,5 +57,5 @@ webpack(
     } else {
       console.log('Finished running webpack.');
     }
-  }
+  },
 );
